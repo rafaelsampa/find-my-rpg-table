@@ -54,36 +54,6 @@ export default async function DashboardPage() {
           </Link>
         </div>
 
-        {/* Stats */}
-        <div className="mb-8 grid gap-4 sm:grid-cols-3">
-          <div className="rounded-xl border border-border bg-card p-6">
-            <div className="text-3xl font-bold text-primary">
-              {campaigns?.length || 0}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Campanhas Criadas
-            </div>
-          </div>
-          <div className="rounded-xl border border-border bg-card p-6">
-            <div className="text-3xl font-bold text-primary">
-              {campaigns?.reduce((acc, c) => acc + c.vagas_preenchidas, 0) || 0}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Jogadores nas Mesas
-            </div>
-          </div>
-          <div className="rounded-xl border border-border bg-card p-6">
-            <div className="text-3xl font-bold text-primary">
-              {campaigns?.filter(
-                (c) => c.vagas_preenchidas < c.vagas_totais
-              ).length || 0}
-            </div>
-            <div className="text-sm text-muted-foreground">
-              Mesas com Vagas
-            </div>
-          </div>
-        </div>
-
         {/* Campaigns List */}
         <div>
           <h2 className="mb-4 text-xl font-semibold text-foreground">

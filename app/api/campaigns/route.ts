@@ -28,19 +28,34 @@ export async function GET(request: NextRequest) {
     query = query.or(`titulo.ilike.%${q}%,historia_ambientacao.ilike.%${q}%`);
   }
   if (sistema) {
-    query = query.eq("sistema", sistema);
+    const sistemas = sistema.split(",").filter(Boolean);
+    if (sistemas.length > 0) {
+      query = query.in("sistema", sistemas);
+    }
   }
   if (modalidade) {
-    query = query.eq("modalidade", modalidade);
+    const modalidades = modalidade.split(",").filter(Boolean);
+    if (modalidades.length > 0) {
+      query = query.in("modalidade", modalidades);
+    }
   }
   if (tematica) {
-    query = query.eq("tematica", tematica);
+    const tematicas = tematica.split(",").filter(Boolean);
+    if (tematicas.length > 0) {
+      query = query.in("tematica", tematicas);
+    }
   }
   if (ferramenta) {
-    query = query.eq("ferramenta", ferramenta);
+    const ferramentas = ferramenta.split(",").filter(Boolean);
+    if (ferramentas.length > 0) {
+      query = query.in("ferramenta", ferramentas);
+    }
   }
   if (tipo) {
-    query = query.eq("tipo", tipo);
+    const tipos = tipo.split(",").filter(Boolean);
+    if (tipos.length > 0) {
+      query = query.in("tipo", tipos);
+    }
   }
 
   const { data, error, count } = await query;
