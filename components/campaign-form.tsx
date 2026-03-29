@@ -57,18 +57,24 @@ export function CampaignForm({ campaign, mode }: CampaignFormProps) {
           : `/api/campaigns/${campaign?.id}`;
       const method = mode === "create" ? "POST" : "PATCH";
 
+      console.log("[v0] Enviando para:", url, method);
+      console.log("[v0] Dados:", formData);
+
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
+      console.log("[v0] Status da resposta:", res.status);
+      
+      const data = await res.json();
+      console.log("[v0] Dados da resposta:", data);
+
       if (!res.ok) {
-        const data = await res.json();
         throw new Error(data.error || "Erro ao salvar campanha");
       }
 
-      const data = await res.json();
       router.push(`/campanhas/${data.id}`);
       router.refresh();
     } catch (err) {
