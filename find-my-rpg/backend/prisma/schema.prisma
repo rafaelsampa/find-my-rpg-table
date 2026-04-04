@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ==========================================
+// ENUMS (Categorias Fixas)
+// ==========================================
+
+enum Sistema {
+  DND_5E
+  LANCER
+  TORMENTA20
+  CALL_OF_CTHULHU
+  PATHFINDER_2E
+  VAMPIRO_A_MASCARA
+  OUTROS
+}
+
+enum Tematica {
+  FANTASIA_MEDIEVAL
+  SCI_FI_MECHA
+  CYBERPUNK
+  TERROR_INVESTIGACAO
+  POS_APOCALIPTICO
+}
+
+enum Modalidade {
+  REMOTO
+  PRESENCIAL
+}
+
+enum VttTool {
+  TABLETOP_SIMULATOR
+  FOUNDRY_VTT
+  ROLL20
+  OWLBEAR_RODEO
+  DISCORD_THEATER_OF_THE_MIND
+  OUTROS
+}
+
+enum TipoCampanha {
+  MODULO_PUBLICADO
+  HOME_BREW
+}
+
+// ==========================================
+// MODELS (Tabelas)
+// ==========================================
+
+model User {
+  id            String     @id @default(uuid())
+  email         String     @unique @db.VarChar(255)
+  password_hash String
+  nome_perfil   String     @db.VarChar(100)
+  created_at    DateTime   @default(now())
+  
+  campaigns     Campaign[] 
+
+  @@map("users")
+}
+
+model Campaign {
+  id                   String       @id @default(uuid())
+  owner_id             String
+  sistema              Sistema
+  tematica             Tematica
+  modalidade           Modalidade
+  cidade               String?      @db.VarChar(120)
+  vtt                  VttTool
+  tipo_campanha        TipoCampanha
+  historia_ambientacao String       @db.Text
+  vagas_totais         Int
+  vagas_preenchidas    Int          @default(0)
+  tem_gm               Boolean      @default(true)
+  created_at           DateTime     @default(now())
+
+  owner                User         @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+
+  @@map("campaigns")
+}
