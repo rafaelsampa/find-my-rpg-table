@@ -1,7 +1,7 @@
 
 
 
-# 🌎 FindMyRPG
+# 🎲  FindMyRPG
 
 🇧🇷 Português | [🇺🇸 English](./README.en.md) | [🇫🇷 Français](./README.fr.md)
 
@@ -69,7 +69,16 @@ Toda regra validada no frontend deve ser obrigatoriamente validada no backend.
 A implementação deve obedecer estritamente esta documentação.
 
 
-# 4. Arquitetura Obrigatória
+# 4. Arquitetura
+
+## Frontend
+
+* React + Vite
+* Tailwind CSS
+* shadcn/ui
+* React Hook Form + Zod
+* Axios
+* TanStack Query
 
 ## Backend
 
@@ -85,14 +94,6 @@ A implementação deve obedecer estritamente esta documentação.
   * Repositories
   * Middlewares
 
-## Frontend
-
-* React + Vite
-* Tailwind CSS
-* shadcn/ui
-* React Hook Form + Zod
-* Axios
-* TanStack Query
 
 ## Banco de Dados
 
